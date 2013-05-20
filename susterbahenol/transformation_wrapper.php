@@ -2,7 +2,8 @@
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  *
- * @package PhpMyAdmin
+ * @version $Id: transformation_wrapper.php 11994 2008-11-24 11:22:44Z nijel $
+ * @package phpMyAdmin
  */
 
 /**
@@ -14,6 +15,7 @@ define('IS_TRANSFORMATION_WRAPPER', true);
  * Gets a core script and starts output buffering work
  */
 require_once './libraries/common.inc.php';
+require_once './libraries/relation.lib.php'; // foreign keys
 require_once './libraries/transformations.lib.php'; // Transformations
 $cfgRelation = PMA_getRelationsParam();
 
@@ -27,8 +29,9 @@ require_once './libraries/db_table_exists.lib.php';
  * Get the list of the fields of the current table
  */
 PMA_DBI_select_db($db);
-if (isset($where_clause)) {
-    $result      = PMA_DBI_query('SELECT * FROM ' . PMA_backquote($table) . ' WHERE ' . $where_clause . ';', null, PMA_DBI_QUERY_STORE);
+$table_def = PMA_DBI_query('SHOW FIELDS FROM ' . PMA_backquote($table), null, PMA_DBI_QUERY_STORE);
+if (isset($primary_key)) {
+    $result      = PMA_DBI_query('SELECT * FROM ' . PMA_backquote($table) . ' WHERE ' . $primary_key . ';', null, PMA_DBI_QUERY_STORE);
     $row         = PMA_DBI_fetch_assoc($result);
 } else {
     $result      = PMA_DBI_query('SELECT * FROM ' . PMA_backquote($table) . ' LIMIT 1;', null, PMA_DBI_QUERY_STORE);
@@ -53,21 +56,24 @@ if ($cfgRelation['commwork'] && $cfgRelation['mimework']) {
     }
 }
 
-// For re-usability, moved http-headers and stylesheets
+// garvin: For re-usability, moved http-headers and stylesheets
 // to a seperate file. It can now be included by libraries/header.inc.php,
 // querywindow.php.
 
 require_once './libraries/header_http.inc.php';
 // [MIME]
 if (isset($ct) && !empty($ct)) {
-    $mime_type = $ct;
+    $content_type = 'Content-Type: ' . $ct;
 } else {
-    $mime_type = (isset($mime_map[$transform_key]['mimetype']) ? str_replace('_', '/', $mime_map[$transform_key]['mimetype']) : $default_ct) . (isset($mime_options['charset']) ? $mime_options['charset'] : '');
+    $content_type = 'Content-Type: ' . (isset($mime_map[$transform_key]['mimetype']) ? str_replace('_', '/', $mime_map[$transform_key]['mimetype']) : $default_ct) . (isset($mime_options['charset']) ? $mime_options['charset'] : '');
+}
+header($content_type);
+
+if (isset($cn) && !empty($cn)) {
+    header('Content-Disposition: attachment; filename=' . $cn);
 }
 
-PMA_download_header($cn, $mime_type);
-
-if (! isset($resize)) {
+if (!isset($resize)) {
     echo $row[$transform_key];
 } else {
     // if image_*__inline.inc.php finds that we can resize,
@@ -84,7 +90,7 @@ if (! isset($resize)) {
     $ratioWidth = $srcWidth/$newWidth;
     $ratioHeight = $srcHeight/$newHeight;
 
-    if ($ratioWidth < $ratioHeight) {
+    if ($ratioWidth < $ratioHeight){
         $destWidth = $srcWidth/$ratioHeight;
         $destHeight = $newHeight;
     } else {

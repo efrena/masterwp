@@ -2,15 +2,14 @@
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  *
- * @package PhpMyAdmin
+ * @version $Id: tbl_import.php 11994 2008-11-24 11:22:44Z nijel $
+ * @package phpMyAdmin
  */
 
 /**
  *
  */
 require_once './libraries/common.inc.php';
-
-$GLOBALS['js_include'][] = 'import.js';
 
 /**
  * Gets tables informations and displays top links
@@ -30,6 +29,6 @@ require_once './libraries/display_import.lib.php';
 /**
  * Displays the footer
  */
-require './libraries/footer.inc.php';
+require_once './libraries/footer.inc.php';
 ?>
 

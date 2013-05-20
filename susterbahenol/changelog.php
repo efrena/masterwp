@@ -3,34 +3,25 @@
 /**
  * Simple script to set correct charset for changelog
  *
- * @package PhpMyAdmin
+ * @version $Id: changelog.php 12326 2009-03-25 16:50:28Z lem9 $
+ * @package phpMyAdmin
  */
 
 /**
- * Gets core libraries and defines some variables
+ * Load paths.
  */
-require './libraries/common.inc.php';
-
-$filename = CHANGELOG_FILE;
+require('./libraries/vendor_config.php');
 
 /**
  * Read changelog.
  */
-// Check if the file is available, some distributions remove these.
-if (is_readable($filename)) {
-
-    // Test if the if is in a compressed format
-    if (substr($filename, -3) == '.gz') {
-        ob_start();
-        readgzfile($filename);
-        $changelog = ob_get_contents();
-        ob_end_clean();
-    } else {
-        $changelog = file_get_contents($filename);
-    }
+if (substr(CHANGELOG_FILE, -3) == '.gz') {
+    ob_start();
+    readgzfile(CHANGELOG_FILE);
+    $changelog = ob_get_contents();
+    ob_end_clean();
 } else {
-    printf(__('The %s file is not available on this system, please visit www.phpmyadmin.net for more information.'), $filename);
-    exit;
+    $changelog = file_get_contents(CHANGELOG_FILE);
 }
 
 /**
@@ -64,7 +55,7 @@ $replaces = array(
 
     // linking files
     '/(\s+)([\\/a-z_0-9\.]+\.(?:php3?|html|pl|js|sh))/i'
-    => '\\1<a href="https://github.com/phpmyadmin/phpmyadmin/commits/HEAD/\\2">\\2</a>',
+    => '\\1<a href="http://phpmyadmin.svn.sourceforge.net/viewvc/phpmyadmin/trunk/phpMyAdmin/\\2?annotate=HEAD">\\2</a>',
 
     // FAQ entries
     '/FAQ ([0-9]+)\.([0-9a-z]+)/i'
@@ -75,22 +66,18 @@ $replaces = array(
     => '<a href="https://sourceforge.net/support/tracker.php?aid=\\1">bug #\\1</a>',
 
     // all other 6+ digit numbers are treated as bugs
-    '/(?<!bug|RFE|patch) #?([0-9]{6,})/i'
+    '/(?<!BUG|RFE|patch) #?([0-9]{6,})/i'
     => ' <a href="https://sourceforge.net/support/tracker.php?aid=\\1">bug #\\1</a>',
 
     // CVE/CAN entries
     '/((CAN|CVE)-[0-9]+-[0-9]+)/'
     => '<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=\\1">\\1</a>',
 
-    // PMASAentries
-    '/(PMASA-[0-9]+-[0-9]+)/'
-    => '<a href="http://www.phpmyadmin.net/home_page/security/\\1.php">\\1</a>',
-
     // Highlight releases (with links)
-    '/([0-9]+)\.([0-9]+)\.([0-9]+)\.0 (\([0-9-]+\))/'
-    => '<a name="\\1_\\2_\\3"></a><a href="https://github.com/phpmyadmin/phpmyadmin/commits/RELEASE_\\1_\\2_\\3">\\1.\\2.\\3.0 \\4</a>',
-    '/([0-9]+)\.([0-9]+)\.([0-9]+)\.([1-9][0-9]*) (\([0-9-]+\))/'
-    => '<a name="\\1_\\2_\\3_\\4"></a><a href="https://github.com/phpmyadmin/phpmyadmin/commits/RELEASE_\\1_\\2_\\3_\\4">\\1.\\2.\\3.\\4 \\5</a>',
+    '/((    ### )(([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+) (.*)))/'
+    => '<a name="\\4_\\5_\\6_\\7"></a>\\2<a href="http://svn.sourceforge.net/viewvc/phpmyadmin/tags/RELEASE_\\4_\\5_\\6_\\7/phpMyAdmin">\\4.\\5.\\6.\\7 \\8</a>',
+    '/((    ### )(([0-9]+)\.([0-9]+)\.([0-9]+) (.*)))/'
+    => '<a name="\\4_\\5_\\6_\\7"></a>\\2<a href="http://svn.sourceforge.net/viewvc/phpmyadmin/tags/RELEASE_\\4_\\5_\\6/phpMyAdmin">\\4.\\5.\\6 \\7</a>',
 
     // Highlight releases (not linkable)
     '/(    ### )(.*)/'
