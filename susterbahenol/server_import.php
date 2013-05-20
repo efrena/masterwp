@@ -2,14 +2,15 @@
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  *
- * @version $Id: server_import.php 11986 2008-11-24 11:05:40Z nijel $
- * @package phpMyAdmin
+ * @package PhpMyAdmin
  */
 
 /**
  *
  */
 require_once './libraries/common.inc.php';
+
+$GLOBALS['js_include'][] = 'import.js';
 
 /**
  * Does the common work

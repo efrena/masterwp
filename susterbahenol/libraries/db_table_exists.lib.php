@@ -4,17 +4,11 @@
  * Ensure the database and the table exist (else move to the "parent" script)
  * and display headers
  *
- * @version $Id: db_table_exists.lib.php 12274 2009-03-03 12:11:20Z helmo $
- * @package phpMyAdmin
+ * @package PhpMyAdmin
  */
 if (! defined('PHPMYADMIN')) {
     exit;
 }
-
-/**
- *
- */
-require_once './libraries/Table.class.php';
 
 if (empty($is_db)) {
     if (strlen($db)) {
@@ -44,7 +38,7 @@ if (empty($is_db)) {
     }
 } // end if (ensures db exists)
 
-if (empty($is_table) && !defined('PMA_SUBMIT_MULT')) {
+if (empty($is_table) && !defined('PMA_SUBMIT_MULT') && ! defined('TABLE_MAY_BE_ABSENT')) {
     // Not a valid table name -> back to the db_sql.php
 
     if (strlen($table)) {
@@ -52,7 +46,7 @@ if (empty($is_table) && !defined('PMA_SUBMIT_MULT')) {
 
         if (! $is_table) {
             $_result = PMA_DBI_try_query(
-                'SHOW TABLES LIKE \'' . PMA_sqlAddslashes($table, true) . '\';',
+                'SHOW TABLES LIKE \'' . PMA_sqlAddSlashes($table, true) . '\';',
                 null, PMA_DBI_QUERY_STORE);
             $is_table = @PMA_DBI_num_rows($_result);
             PMA_DBI_free_result($_result);
@@ -79,7 +73,7 @@ if (empty($is_table) && !defined('PMA_SUBMIT_MULT')) {
             }
 
             if (! $is_table) {
-                require 'db_sql.php';
+                include './db_sql.php';
                 exit;
             }
         }

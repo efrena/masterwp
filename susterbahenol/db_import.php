@@ -2,14 +2,15 @@
 /* vim: set expandtab sw=4 ts=4 sts=4: */
 /**
  *
- * @version $Id: db_import.php 11982 2008-11-24 10:32:56Z nijel $
- * @package phpMyAdmin
+ * @package PhpMyAdmin
  */
 
 /**
  *
  */
 require_once './libraries/common.inc.php';
+
+$GLOBALS['js_include'][] = 'import.js';
 
 /**
  * Gets tables informations and displays top links

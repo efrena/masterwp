@@ -3,8 +3,7 @@
 /**
  * print css file from theme Original
  *
- * @version $Id: theme_print.css.php 10145 2007-03-20 13:39:12Z cybot_tm $
- * @package phpMyAdmin-theme
+ * @package PhpMyAdmin-theme
  * @subpackage Original
  */
 ?>
@@ -36,4 +35,8 @@ th, td {
 th {
     font-weight:       bold;
     background-color:  #e5e5e5;
+}
+
+.hide {
+    display: none;
 }
