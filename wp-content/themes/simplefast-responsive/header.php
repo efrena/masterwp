@@ -4,6 +4,9 @@
 <![endif]-->
 <html <?php language_attributes(); ?>>
 <head>
+<meta name="google-site-verification" content="AfhuFJAFa3cWv2xwmXxYYUv07dpJRDdZry8wuhlK5q0" />
+<meta name="google-site-verification" content="OI1cnil3fEmxlVR0mNVxjqtf24nIJaTvA0e7i-O-uDI" />
+<meta name="google-site-verification" content="cMjQhAymCZo3AoLUnKxEMr6okGNs7BO7C1-hrn_Ey5A" />
 <meta charset="utf-8">
 <title> <?php if ( is_home() ) { ?><?php bloginfo('name'); ?> - <?php bloginfo('description'); } else 
 { ?><?php  wp_title(''); ?> - <?php bloginfo('name'); } ?></title>
@@ -14,6 +17,7 @@
 <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 <link rel="Shortcut Icon" href="<?php echo get_template_directory_uri();?>/images/favicon.ico" type="image/x-icon" />
 <?php wp_head(); ?>
+
 </head>
 <body <?php body_class(''); ?>> 
 <div id="wrap">

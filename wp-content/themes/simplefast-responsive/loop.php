@@ -13,5 +13,5 @@ if (fastestwp_mobile()) { ?>
 <?php get_template_part( 'ads' ); ?>
 <?php get_template_part( 'navigator' ); ?>
 <?php else : ?>
-<article class="post"><h2>Your Search Result:</h2></article>
+<article class="post"></article>
 <?php endif; ?>
