@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: seo, widget, links, google, widget, post, sidebar, internal linking, incoming search terms, auto tags
 Requires at least: 2.5
 Tested up to: 3.2.1
-Stable tag: 1.535
+Stable tag: 1.53
 
 Multiply blog traffic by strengthening on page SEO, increasing the number of indexed pages, auto convert search terms into post tags, and more.
 

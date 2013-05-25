@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: SEO SearchTerms Tagging 2
-Plugin URI: http://exclusivewp.com/searchterms-tagging-2-plugin/
+Plugin URI: http://exclusivewordpress.com/searchterms-tagging-2-plugin/
 Description:  Multiply blog traffic by strengthening on page SEO, increasing the number of indexed pages, auto convert search terms into post tags, and more.
-Version: 1.535
+Version: 1.53
 Author: Purwedi Kurniawan
-Author URI: http://exclusivewp.com
+Author URI: http://exclusivewordpress.com
 */
 /**
 * update: july 30, 2011
@@ -602,7 +602,7 @@ function pk_stt2_admin_print_footer(){
         <div class="inside">
           <div class="frame" style="text-align:center">
 		  <p><strong>Recommended SEO Resources: <a href="http://www.warriorplus.com/linkwso/6pwllx/11123" target="_blank">Easy WP SEO Plugin</a> | <a href="http://www.warriorplus.com/linkwso/j2jz3p/11123" target="_blank">Stealth Keyword Competition Analyzer</a> | <a href="http://www.warriorplus.com/linkwso/2ns6d1/11123" target="_blank">FastAttacks SEO eBook</a></strong></p>
-		  <p>Copyright &copy; 2010-2011 by Purwedi Kurniawan. Feel free to <a href="http://exclusivewp.com/contact/" target="_blank">contact me</a> if you need help with the plugin.</p> </div>
+		  <p>Copyright &copy; 2010-2011 by Purwedi Kurniawan. Feel free to <a href="http://exclusivewordpress.com/contact/" target="_blank">contact me</a> if you need help with the plugin.</p> </div>
         </div>
      </div>
   </div>
@@ -1010,7 +1010,7 @@ function pk_stt2_function_prepare_searchterms( $searchterms, $options, $popular=
 				if ( 1 == $options['auto_link'] ){									   
 				   $permalink = get_permalink( $post->ID );		
 				} elseif ( 2 == $options['auto_link']){			
-					$permalink = get_bloginfo( 'url' ).'/search/'.user_trailingslashit(pk_stt2_function_sanitize_search_link($term->meta_value));
+					$permalink = get_bloginfo( 'url' ).'/new/'.user_trailingslashit(pk_stt2_function_sanitize_search_link($term->meta_value));
 				}
 			} else {
 				$permalink = ( 0 == $term->post_id ) ? get_bloginfo('url') : get_permalink($term->post_id);		
@@ -1306,7 +1306,7 @@ function pk_stt2_register_2($form_name='frm2',$name,$email) {
 	  <tr><td><h3>Step 1:</h3></td></tr>
 	  <tr><td>A confirmation email has been sent to your email "<?php echo $email;?>". You must click on the confirmation link inside the email to register the plugin.</td></tr>
 	  <tr><td>&nbsp;</td></tr>
-	  <tr><td>The confirmation email will look like this:<br /><img src="http://exclusivewp.com/wp-content/uploads/2010/08/email-confirmation.gif" style="margin-top:10px;border:0;" /></td></tr>
+	  <tr><td>The confirmation email will look like this:<br /><img src="http://exclusivewordpress.com/wp-content/uploads/2010/08/email-confirmation.gif" style="margin-top:10px;border:0;" /></td></tr>
 	  <tr><td>&nbsp;</td></tr>
 	  <tr><td><h3>Step 2:</h3></td></tr>
 	  <tr><td>Click on the button below to Verify and Activate the plugin.</td></tr>
@@ -1326,11 +1326,11 @@ function pk_stt2_register_2($form_name='frm2',$name,$email) {
 	   <tr><td>3. Still no confirmation email and I have already registered twice.<br/>Using the form above, try to register again using DIFFERENT EMAIL ADDRESS.</td></tr>
 	   <tr><td>&nbsp;</td></tr>
 	   <tr><td>4. I receive an error like this:<br />
-			 <img src="http://exclusivewp.com/wp-content/uploads/2010/08/email-confirmation-error.gif"  style="margin-top:10px;border:0;"  /><br />		   
+			 <img src="http://exclusivewordpress.com/wp-content/uploads/2010/08/email-confirmation-error.gif"  style="margin-top:10px;border:0;"  /><br />		   
 		   <br/>This error means that you have already subscribed but have not yet clicked on the link inside confirmation email. In order to  avoid any spam complain we don't send repeated confirmation emails.</td>
 	   </tr>
 	   <tr><td>&nbsp;</td></tr>
-	   <tr><td>5. If you still got problems, please <a href="http://exclusivewp.com/contact/" target="_blank">contact us</a></strong> about it and we will get to you ASAP.</td></tr>
+	   <tr><td>5. If you still got problems, please <a href="http://exclusivewordpress.com/contact/" target="_blank">contact us</a></strong> about it and we will get to you ASAP.</td></tr>
 	 </table>
 	 </center>		
 	<p>&nbsp;</p>
@@ -1560,7 +1560,7 @@ function pk_stt2_admin_donate(){
 	<div style="text-align:center;">
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 	<input name="cmd" value="_donations" type="hidden" />
-	<input name="business" value="poer@exclusivewp.com" type="hidden" />
+	<input name="business" value="poer@exclusivewordpress.com" type="hidden" />
 	<input name="item_name" value="Donation for SEO SearchTerms Tagging 2 Plugin" type="hidden" />
 	<input name="item_number" value="wp-admin" type="hidden" />
 	<select name="currency_code" value="USD">

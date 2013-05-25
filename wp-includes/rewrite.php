@@ -453,7 +453,7 @@ class WP_Rewrite {
 	 * @access private
 	 * @var string
 	 */
-	var $search_base = 'search';
+	var $search_base = 'new';
 
 	/**
 	 * Permalink structure for searches.
